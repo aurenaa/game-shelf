@@ -30,27 +30,5 @@ namespace GameShelf.Controllers
             return Ok(game);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateGameDto dto)
-        {
-            var game = await _gameService.CreateAsync(dto);
-            return Ok(game);
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var deleted = await _gameService.DeleteAsync(id);
-            if (!deleted) return NotFound();
-            return NoContent();
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateGameDto dto)
-        {
-            var game = await _gameService.UpdateAsync(id, dto);
-            if (game == null) return NotFound();
-            return Ok(game);
-        }
     }
 }

@@ -40,4 +40,13 @@ namespace GameShelf.DTOs
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
     }
+
+    public class RawgSearchResponse
+    {
+        [JsonPropertyName("count")]
+        public int Count { get; set; }
+
+        [JsonPropertyName("results")]
+        public List<RawgGameDto> Results { get; set; } = new();
+    }
 }

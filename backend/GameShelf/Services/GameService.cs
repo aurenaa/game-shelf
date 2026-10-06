@@ -1,6 +1,7 @@
 ﻿using GameShelf.Data;
 using GameShelf.DTOs;
 using GameShelf.Mappers;
+using GameShelf.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameShelf.Services
@@ -12,24 +13,6 @@ namespace GameShelf.Services
         public GameService(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
-        }
-
-        public async Task<GameDto?> CreateAsync(CreateGameDto dto)
-        {
-            var game = GameMapper.ToModel(dto);
-            _appDbContext.Games.Add(game);
-            await _appDbContext.SaveChangesAsync();
-            return GameMapper.ToDto(game);
-        }
-
-        public async Task<bool> DeleteAsync(int id)
-        {
-            var game = await _appDbContext.Games.FindAsync(id);
-            if (game == null) return false;
-
-            _appDbContext.Games.Remove(game);
-            await _appDbContext.SaveChangesAsync();
-            return true;
         }
 
         public async Task<List<GameDto>> GetAllAsync()
@@ -44,25 +27,33 @@ namespace GameShelf.Services
             return game == null ? null : GameMapper.ToDto(game);
         }
 
-        public async Task<GameDto?> UpdateAsync(int id, UpdateGameDto dto)
+        public async Task<GameDto?> GetByExternalIdAsync(string externalId)
         {
-            var game = await _appDbContext.Games.FindAsync(id);
-            if (game == null) return null;
+            var game = await _appDbContext.Games.FirstOrDefaultAsync(g => g.ExternalId == externalId);
+            return game == null ? null : GameMapper.ToDto(game);
+        }
 
-            game.Title = dto.Title;
-            game.Description = dto.Description;
-            game.Publisher = dto.Publisher;
-            game.Genre = dto.Genre;
-            game.ImageUrl = dto.ImageUrl;
-            game.GameType = dto.GameType;
-            game.GameStatus = dto.GameStatus;
-            game.Rating = dto.Rating;
-            game.HoursPlayed = dto.HoursPlayed;
-            game.MinPlayers = dto.MinPlayers;
-            game.MaxPlayers = dto.MaxPlayers;
-            game.PlaytimeMinutes = dto.PlaytimeMinutes;
+        public async Task<GameDto> CreateFromRawgAsync(RawgGameDto rawgGame)
+        {
+            var game = new Game
+            {
+                ExternalId = rawgGame.RawgId.ToString(),
+                Title = rawgGame.Title,
+                Description = rawgGame.Description,
+                ImageUrl = rawgGame.ImageUrl,
+                Genre = rawgGame.Genres != null
+                    ? string.Join(", ", rawgGame.Genres.Select(g => g.Name))
+                    : null,
+                Publisher = rawgGame.Publishers != null
+                    ? string.Join(", ", rawgGame.Publishers.Select(p => p.Name))
+                    : null,
+                ReleaseDate = rawgGame.ReleaseDate,
+                MetacriticScore = rawgGame.MetacriticScore
+            };
 
+            _appDbContext.Games.Add(game);
             await _appDbContext.SaveChangesAsync();
+
             return GameMapper.ToDto(game);
         }
     }

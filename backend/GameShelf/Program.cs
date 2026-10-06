@@ -12,6 +12,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<IRawgService, RawgService>();      
+builder.Services.AddScoped<IUserGameService, UserGameService>();
+builder.Services.AddHttpClient<IRawgService, RawgService>();
 
 var app = builder.Build();
 

@@ -7,7 +7,7 @@ namespace GameShelf.DTOs
     {
         [Required]
         public string ExternalId { get; set; } = string.Empty;
-        public GameStatus Status { get; set; };
+        public GameStatus Status { get; set; }
         [Range(1, 5)]
         public int? Rating { get; set; }
         public int? HoursPlayed {  get; set; }

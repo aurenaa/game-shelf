@@ -1,4 +1,6 @@
-﻿namespace GameShelf.DTOs
+﻿using GameShelf.Models;
+
+namespace GameShelf.DTOs
 {
     public class UserGameDto
     {
