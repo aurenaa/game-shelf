@@ -58,7 +58,9 @@ namespace GameShelf.Services
                 Publisher = rawgGame.Publishers != null
                     ? string.Join(", ", rawgGame.Publishers.Select(p => p.Name))
                     : null,
-                ReleaseDate = rawgGame.ReleaseDate,
+                ReleaseDate = rawgGame.ReleaseDate.HasValue
+                    ? DateTime.SpecifyKind(rawgGame.ReleaseDate.Value, DateTimeKind.Utc)
+                    : null,  
                 MetacriticScore = rawgGame.MetacriticScore
             };
 

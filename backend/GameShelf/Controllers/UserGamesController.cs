@@ -33,7 +33,7 @@ namespace GameShelf.Controllers
         [HttpDelete("{userId}/{id}")]
         public async Task<IActionResult> RemoveUserGame(int userId, int id)
         {
-            var deleted = await _userGameService.RemoveAsync(userId, id);
+            var deleted = await _userGameService.RemoveAsync(id, userId);
             if (!deleted) return NotFound();
             return NoContent();
         }
