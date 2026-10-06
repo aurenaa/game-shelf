@@ -11,5 +11,7 @@ namespace GameShelf.Data
         }
 
         public DbSet<Game> Games { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<UserGame> UserGames { get; set; } = null!;
     }
 }
