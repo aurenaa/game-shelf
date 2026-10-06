@@ -9,10 +9,12 @@ namespace GameShelf.Controllers
     public class GamesController : ControllerBase
     {
         private readonly IGameService _gameService;
+        private readonly IRawgService _rawgService;
 
-        public GamesController(IGameService gameService)
+        public GamesController(IGameService gameService, IRawgService rawgService)
         {
             _gameService = gameService;
+            _rawgService = rawgService;
         }
 
         [HttpGet]
@@ -28,6 +30,16 @@ namespace GameShelf.Controllers
             var game = await _gameService.GetByIdAsync(id);
             if (game == null) return NotFound();
             return Ok(game);
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> Search([FromQuery] string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+                return BadRequest("Query is required.");
+
+            var games = await _rawgService.SearchAsync(query);
+            return Ok(games);
         }
 
     }
