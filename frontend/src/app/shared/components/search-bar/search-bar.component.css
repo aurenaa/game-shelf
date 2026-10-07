@@ -1,0 +1,22 @@
+.btn-search {
+    background: none;
+    border: none;
+}
+
+.search-bar {
+    display: flex;
+    gap: 5px;
+}
+
+input {
+    width: 400px;
+    border-radius: 5px;
+    border: none;
+    padding: 8px;
+    background-color: grey;
+}
+
+input::placeholder {
+  color: white;
+  opacity: 0.7;
+}

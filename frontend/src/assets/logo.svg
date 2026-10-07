@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200" width="100%" height="200">
+  <defs>
+    <linearGradient id="v2Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EC4899" />
+      <stop offset="50%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+  </defs>
+  <rect width="500" height="200" rx="24" fill="#090D16" />
+  
+  <!-- Linija police ispod svega -->
+  <line x1="60" y1="150" x2="440" y2="150" stroke="#1E293B" stroke-width="6" stroke-linecap="round" />
+  <line x1="120" y1="150" x2="380" y2="150" stroke="url(#v2Grad)" stroke-width="6" stroke-linecap="round" />
+
+  <!-- LEVO: D-Pad krstić -->
+  <g transform="translate(70, 75)">
+    <path d="M 25 0 L 25 50 M 0 25 L 50 25" stroke="#EC4899" stroke-width="12" stroke-linecap="round" />
+  </g>
+
+  <!-- SREDINA: GS Monogram -->
+  <text x="250" y="130" font-family="'Montserrat', 'Segoe UI', sans-serif" font-weight="900" font-size="105" fill="#F8FAFC" text-anchor="middle" letter-spacing="6">GS</text>
+
+  <!-- DESNO: Akciona dugmad (ABXY tasteri) -->
+  <g transform="translate(370, 60)">
+    <circle cx="25" cy="10" r="7" fill="#3B82F6" />
+    <circle cx="10" cy="25" r="7" fill="#8B5CF6" />
+    <circle cx="40" cy="25" r="7" fill="#EC4899" />
+    <circle cx="25" cy="40" r="7" fill="#10B981" />
+  </g>
+</svg>

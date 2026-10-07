@@ -1,0 +1,11 @@
+<div class="search-bar">
+    <input 
+        type="text"
+        placeholder="Search games.."
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="onSearch()"/>
+    
+    <button class="btn-search" (click)="onSearch()">
+        <img src="assets/search.svg" alt="Search" />
+    </button>
+</div>  
