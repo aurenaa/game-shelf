@@ -26,5 +26,13 @@ namespace GameShelf.Services
             var response = await _httpClient.GetFromJsonAsync<RawgSearchResponse>(url);
             return response?.Results ?? new List<RawgGameDto>();
         }
+
+        public async Task<List<RawgGameDto>> GetTrendingAsync()
+        {
+            var url = $"https://api.rawg.io/api/games?key={_apiKey}&ordering=-metacritic&page_size=20";
+
+            var response = await _httpClient.GetFromJsonAsync<RawgSearchResponse>(url);
+            return response?.Results ?? new List<RawgGameDto>();
+        }
     }
 }

@@ -1,1 +1,15 @@
-<p>trending-games works!</p>
+<div class="trending-container">
+    @if (loading) {
+        <p>Loading...</p>
+    } @else {
+        @if (games.length > 0) {
+            <div class="games-grid">
+                @for (game of games; track game.id) {
+                    <app-game-card [game]="game"></app-game-card>
+                }
+            </div>
+        } @else {
+            <p>There are no games.</p>
+        }
+    }
+</div>  

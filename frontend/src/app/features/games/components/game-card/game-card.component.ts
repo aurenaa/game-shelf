@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Game } from '../../models/game.model';
+import { RawgGame } from '../../models/rawg-game.model';
 
 @Component({
   selector: 'app-game-card',
@@ -7,5 +7,5 @@ import { Game } from '../../models/game.model';
   styleUrls: ['./game-card.component.css']
 })
 export class GameCardComponent {
-  @Input() game!: Game;
+  @Input() game!: RawgGame;
 }

@@ -42,5 +42,12 @@ namespace GameShelf.Controllers
             return Ok(games);
         }
 
+        [HttpGet("trending")]
+        public async Task<IActionResult> GetTrending()
+        {
+            var games = await _rawgService.GetTrendingAsync();
+            return Ok(games);
+        }
+
     }
 }

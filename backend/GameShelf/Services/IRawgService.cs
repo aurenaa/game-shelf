@@ -6,5 +6,6 @@ namespace GameShelf.Services
     {
         Task<List<RawgGameDto>> SearchAsync(string query);
         Task<RawgGameDto?> GetByIdAsync(string externalId);
+        Task<List<RawgGameDto>> GetTrendingAsync();
     }
 }
